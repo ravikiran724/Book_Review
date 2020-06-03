@@ -1,0 +1,83 @@
+{% extends 'layout.html' %}
+{% block title %}
+Book Page
+{% endblock %}
+{% block opt %}
+<style>
+/*
+table{
+    border: black solid;
+    margin: 10px auto;
+    border-collapse: collapse;
+}
+tr th,td{
+    border: black solid 1px;
+    padding: 10px;
+    text-align: center;
+}
+*/
+</style>
+{% endblock %}
+{% block heading %}
+Book Details
+{% endblock %}
+{% block body %}
+<button onclick="location.href= '{{ url_for('logout') }}'" style="position: absolute;right: 10px;top: 10px;" class="btn btn-danger">Logout</button>
+<table class="table table-striped">
+    {% for i in dtat %}
+    <tr>
+    <th>ISBN:</th>
+    <td>{{ i.isbn }}</td>
+    </tr>
+<tr>
+    <th>Author:</th>
+    <td>{{ i.author }}</td>
+    </tr>
+<tr>
+    <th>Title:</th>
+    <td>{{ i.title }}</td>
+    </tr>
+<tr>
+    <th>Year:</th>
+    <td>{{ i.year }}</td>
+    </tr>
+    
+</table>
+{% if gr %}
+<div >
+<form action="{{ url_for('review') }}" method="post">
+<p style="font-family: monospace;font-weight: bold;font-size: 20px;">Give review</p>
+    <div class="form-group">
+<!--      <label for="comment">Give Review:</label>-->
+      <textarea class="form-control" rows="5" id="comment" name="review"></textarea>
+    </div>
+<!--<input type="text" name="review"><br/>-->
+<p style="font-family: monospace;font-weight: bold;font-size: 20px;">Rating in scale of 1 to 5</p>
+<input type="number" name="re"><br/>
+    <input type="hidden" value="{{ i.isbn }}" name="isbn">
+    <br/>
+<input type="submit" value="Submit Review" class="btn btn-success">
+    </form>
+    </div>
+{% else %}
+<p style="color:green;text-align: center;">You have Submitted review for this Book</p>
+{% endif %}
+   {% endfor %}
+<p style="font-family: monospace;font-weight: bold;font-size: 20px;">User Reviews on this Website</p>
+<div class="grr" style="background-color:blanchedalmond">
+    {% if reviews %}
+    <ul>
+    {% for i in reviews %}
+        <li style="font-size: 15px;font-family: monospace;">{{ i.review }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+    <p>No reviews For this Book</p>
+    {% endif %}
+</div>
+<div class="gr" style="border: 1px solid black;">
+<p><b>From GoodReads</b></p>
+<p><b>Average Rating: </b>{{ avg }}</p>
+<p><b>Total Number Of Ratings:  </b>{{ rc }}</p>
+    </div>
+{% endblock %}

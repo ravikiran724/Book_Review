@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+{% block title %}
+Home page
+{% endblock %}
+{% block heading %}
+Welcome to Home Page 
+{% endblock %}
+{% block body %}
+<div style="text-align: center;">
+{% for i in get_flashed_messages() %}
+<p style="text-align: center;color: red;font-size: 18px;">{{ i }}</p>
+{% endfor %}
+<form method="post" action="{{ url_for('check') }}">
+     <span style="font-size: 22px;font-family: monospace;">Username:</span> <input type="text" name="user" placeholder="Enter username"><br/><br/>
+    <span style="font-size: 22px; font-family: monospace;">Password:</span>  <input type="password" name="pass" placeholder="Enter Passowrd"><br/><br/>
+    <input type="submit" value="Login" class="btn btn-primary" >
+    <input type="button" onclick="location.href= '{{ url_for('r') }}'" value="Register" class="btn btn-success">
+</form>
+</div>
+{% endblock %}

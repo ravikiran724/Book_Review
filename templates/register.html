@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+{% block title %}
+Registeration page
+{% endblock %}
+{% block opt %}
+<style>
+table, th, td {
+  padding: 10px;
+}
+    h1{
+        font-family: fantasy;
+    }
+</style>
+{% endblock %}
+{% block heading %}
+Welcome to Registeration Page 
+{% endblock %}
+{% block body %}
+<span style="padding-left: 36.5%;font-family: sans-serif;font-size: 20px;color: chartreuse;">Enter Details To Register</span>
+<br/><br/>
+{% for i in get_flashed_messages() %}
+<span style="color: red;font-size: 18px;padding-left: 36.5%">{{ i }}</span>
+{% endfor %}
+<div style="text-align: center">
+
+<form method="post" action="{{ url_for('register') }}">
+    <table style="margin: 0px auto;">
+   <tr><td> User name:</td><td><input type="text" name="user"></td></tr>
+    <tr><td>Password:</td><td><input type="password" name="pass"></td></tr>
+    <tr><td>Re-type password:</td><td><input type="password" name="tpass"></td></tr>
+        </table>
+    <input type="submit" value="Register" class="btn btn-primary">
+</form>
+    </div>
+{% endblock %}

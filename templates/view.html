@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+{% block title %}
+Search page
+{% endblock %}
+{% block opt %}
+<style>
+/*
+table{
+    border: black solid;
+    margin: 10px auto;
+    border-collapse: collapse;
+}
+tr th,td{
+    border: black solid 1px;
+    padding: 10px;
+    text-align: center;
+}
+*/
+</style>
+{% endblock %}
+{% block heading %}
+Search Results
+{% endblock %}
+{% block body %}
+<button onclick="location.href= '{{ url_for('logout') }}'" style="position: absolute;right: 10px;top: 10px;" class="btn btn-danger">Logout</button>
+<table class="table table-striped">
+    <tr>
+    <th>
+        ISBN
+        </th>
+        <th>
+        Author
+        </th>
+        <th>
+        Title
+        </th>
+        <th>
+        Year
+        </th>
+        <th>
+        Action</th>
+    </tr>
+    {% for i in data %}
+    <tr>
+        <td>{{ i.isbn }}</td>
+        <td>{{ i.author }}</td>
+        <td>{{ i.title }}</td>
+        <td>{{ i.year }}</td>
+        <td><form action="{{ url_for('bookk') }}" method="post"><input type="hidden" name="id" value="{{ i.isbn }}"><input type="submit" value="Book" class="btn btn-success"></form></td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
